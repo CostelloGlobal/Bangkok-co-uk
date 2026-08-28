@@ -1,0 +1,86 @@
+/* Tailwind v4. If your project is on Tailwind v3, replace the import below
+   with the three @tailwind directives (base/components/utilities). */
+@import "tailwindcss";
+
+:root {
+  --gold: #c9a84c;
+  --gold-soft: #e9d9a6;
+  --gold-deep: #8f7226;
+  --jade: #0f5132;
+  --jade-deep: #0a3a23;
+  --terra: #b33a3a;
+  --terra-deep: #96302f;
+  --cream: #faf4e8;
+  --paper: #fffdf7;
+  --ink: #2b2418;
+  --ink-soft: #57503f;
+  --line: #e8dfc9;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body), "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display { font-family: var(--font-display), Georgia, "Times New Roman", serif; }
+
+.bg-cream     { background-color: var(--cream); }
+.bg-jade      { background-color: var(--jade); }
+.bg-jade-deep { background-color: var(--jade-deep); }
+.text-jade    { color: var(--jade); }
+.text-gold    { color: var(--gold); }
+.text-gold-deep { color: var(--gold-deep); }
+.text-terra   { color: var(--terra); }
+.text-ink-soft{ color: var(--ink-soft); }
+.border-line  { border-color: var(--line); }
+
+.eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.thai { font-family: "Noto Sans Thai", "Leelawadee UI", "Thonburi", "Sukhumvit Set", sans-serif; }
+
+::selection { background: #efdfaf; color: #2b2418; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+/* Hero skyline — line-art draws itself in on load */
+.skyline path, .skyline circle {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: skyline-draw 1.9s cubic-bezier(0.45, 0, 0.2, 1) forwards;
+}
+@keyframes skyline-draw { to { stroke-dashoffset: 0; } }
+
+/* Gentle content entrance */
+.rise { animation: rise 0.8s cubic-bezier(0.2, 0.6, 0.2, 1) both; }
+@keyframes rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Pulse ring when the hero search jumps to an area card */
+.flash-target { animation: flash-ring 1.9s ease; }
+@keyframes flash-ring {
+  0%   { box-shadow: 0 0 0 4px rgba(201, 168, 76, 0.85); }
+  100% { box-shadow: 0 0 0 4px rgba(201, 168, 76, 0); }
+}
+
+/* FAQ accordions */
+summary { list-style: none; }
+summary::-webkit-details-marker { display: none; }
+.faq-icon { transition: transform 0.25s ease; }
+details[open] > summary .faq-icon { transform: rotate(45deg); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .skyline path, .skyline circle { animation: none; stroke-dashoffset: 0; }
+  .rise { animation: none; }
+  .flash-target { animation: none; }
+}
