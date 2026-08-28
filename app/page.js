@@ -20,6 +20,10 @@ const LAST_REVIEWED = '1 February 2025';
 const HERO_IMG =
   'https://images.unsplash.com/photo-1508009603885-50cf7c579365?q=80&w=2400&auto=format&fit=crop';
 
+const HERO_VIDEO_ID = 'tET1abGvZDk';
+const HERO_POSTER =
+  'https://images.unsplash.com/photo-1563492065599-3520f775eeed?q=80&w=2400&auto=format&fit=crop';
+
 const U = (id) => `https://images.unsplash.com/${id}?q=80&w=1600&auto=format&fit=crop`;
 
 const NAV_LINKS = [
@@ -461,17 +465,23 @@ function Skyline() {
 function Hero() {
   return (
     <section className="relative flex min-h-[640px] items-end overflow-hidden bg-[#161310] md:min-h-[88vh]">
-      <SmartImage
-        src={HERO_IMG}
-        seed="bangkok-hero"
-        alt="Wat Arun’s porcelain-studded prang glowing at sunset across the Chao Phraya River in Bangkok, Thailand"
-        width={2400}
-        height={1350}
-        sizes="100vw"
-        quality={85}
-        priority
-        className="absolute inset-0 h-full w-full object-cover"
-      />
+      <div className="absolute inset-0 h-full w-full overflow-hidden" aria-hidden="true">
+        <iframe
+          className="pointer-events-none absolute left-1/2 top-1/2 h-[130%] w-[130%]"
+          style={{ transform: 'translate(-50%, -50%) scale(1.15) translateY(-7%)' }}
+          src={`https://www.youtube-nocookie.com/embed/${HERO_VIDEO_ID}?autoplay=1&mute=1&loop=1&playlist=${HERO_VIDEO_ID}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&disablekb=1`}
+          title="Bangkok — Tourism Authority of Thailand"
+          allow="autoplay; encrypted-media"
+          frameBorder="0"
+        />
+      </div>
+      <noscript>
+        <img
+          src={HERO_POSTER}
+          alt="Bangkok skyline"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+      </noscript>
       <div className="absolute inset-0 bg-gradient-to-t from-[#12100c]/90 via-[#12100c]/40 to-[#12100c]/15" aria-hidden="true" />
       <Skyline />
 
