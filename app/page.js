@@ -10,7 +10,6 @@ import { Icon } from '../components/icons';
 import {
   SmartImage,
   ExploreSearch,
-  AreaCard,
   MonthStrip,
   NewsletterForm,
 } from '../components/interactive';
@@ -21,10 +20,9 @@ const HERO_IMG =
   'https://images.unsplash.com/photo-1508009603885-50cf7c579365?q=80&w=2400&auto=format&fit=crop';
 
 const HERO_VIDEO_ID = 'tET1abGvZDk';
+
 const HERO_POSTER =
   'https://images.unsplash.com/photo-1563492065599-3520f775eeed?q=80&w=2400&auto=format&fit=crop';
-
-const U = (id) => `https://images.unsplash.com/${id}?q=80&w=1600&auto=format&fit=crop`;
 
 const NAV_LINKS = [
   ['Destinations', '#areas'],
@@ -43,69 +41,13 @@ const FACTS = [
   { icon: 'pin', k: 'Why it works', v: 'A complete city-break destination in its own right — and the gateway to Thailand’s islands, jungles and ancient capitals.' },
 ];
 
+/* Area imagery policy: only images that are confirmed to show the exact named
+   Bangkok location are used as photographs. Where no verified photo exists,
+   the card renders a jade graphic tile instead of a misleading stock photo —
+   drop a licensed, verified URL into `img` and the photo slot activates
+   automatically. Verified in use: Wat Arun at dusk (hero/Riverside) and
+   Yaowarat Road neon (Chinatown). */
 const AREAS = [
-  {
-    id: 'area-old-city',
-    name: 'Old City & Rattanakosin',
-    kicker: 'The historic core',
-    thai: 'รัตนโกสินทร์',
-    short: 'the Old City',
-    bestFor: 'first-timers and temple lovers',
-    img: U('photo-1533050487297-09b450131914'),
-    seed: 'bk-old-city',
-    alt: 'Golden spires of the Grand Palace complex in Bangkok’s Old City under a blue sky',
-    sizes: '(min-width: 768px) 58vw, 100vw',
-    span: 'md:col-span-7',
-    imgH: 'h-64 sm:h-80 md:h-[430px]',
-    desc: 'The historic heart of Bangkok, home to its grandest sights: the Grand Palace and Wat Phra Kaew, the reclining Buddha at Wat Pho and Wat Arun rising across the river. Wide boulevards, canal-side shophouses and the city’s best museums make this the district to slow down in.',
-    plan: [
-      { t: '08:30', d: 'Grand Palace at opening — beat the heat and the tour groups (฿500, dress code enforced).' },
-      { t: '11:30', d: 'Wat Pho for the reclining Buddha, then a 30-minute massage on site (from ฿420).' },
-      { t: '15:00', d: 'Cross the river on the ฿5 ferry and climb Wat Arun’s terrace before the light turns golden.' },
-      { t: '19:00', d: 'Dinner on the Tha Tien stretch, long-tail boats chattering past.' },
-    ],
-  },
-  {
-    id: 'area-sukhumvit',
-    name: 'Sukhumvit',
-    kicker: 'The modern spine',
-    thai: 'สุขุมวิท',
-    short: 'Sukhumvit',
-    bestFor: 'nightlife, dining and easy BTS living',
-    img: U('photo-1563492065599-3520f775eeed'),
-    seed: 'bk-sukhumvit',
-    alt: 'Bangkok traffic streaming through Sukhumvit after dark beneath neon signs',
-    sizes: '(min-width: 768px) 42vw, 100vw',
-    span: 'md:col-span-5',
-    imgH: 'h-64 sm:h-80 md:h-[430px]',
-    desc: 'Bangkok’s modern spine, running from Nana out past Thong Lor and On Nut — malls (Terminal 21, EmQuartier), international kitchens, speakeasies and some of the city’s highest rooftop bars. By day it’s cafés and day-spas; after dark, Soi 11 and Thong Lor take over.',
-    plan: [
-      { t: '11:00', d: 'Terminal 21 — a different world city on every floor, plus a food court that costs pennies.' },
-      { t: '16:00', d: 'Benjakitti Park’s skyline boardwalk, built out over the water.' },
-      { t: '19:30', d: 'Izakayas and wine bars around Thong Lor 10.' },
-      { t: '22:00', d: 'One last cocktail on a Soi 11 rooftop.' },
-    ],
-  },
-  {
-    id: 'area-chinatown',
-    name: 'Chinatown / Yaowarat',
-    kicker: 'Noodle nirvana',
-    thai: 'เยาวราช',
-    short: 'Chinatown',
-    bestFor: 'food lovers and night photographers',
-    img: U('photo-1552550018-5253c1b171e3'),
-    seed: 'bk-chinatown',
-    alt: 'Neon-lit street scene in Bangkok’s Chinatown at night',
-    sizes: '(min-width: 768px) 33vw, 100vw',
-    span: 'md:col-span-4',
-    imgH: 'h-56',
-    desc: 'One of the world’s great Chinatowns — a gilded, incense-scented grid of gold shops, herbalists and street vendors, crowned by Wat Traimit’s 5.5-tonne solid-gold Buddha. Come hungry: Yaowarat Road becomes one of Asia’s finest open-air restaurants after 6pm, and the MRT’s Wat Mangkon station drops you right inside it.',
-    plan: [
-      { t: '10:00', d: 'Wat Traimit’s Golden Buddha before the crowds.' },
-      { t: '14:00', d: 'Crawl Sampeng Lane’s wholesale alley, coffee in a shophouse after.' },
-      { t: '18:30', d: 'The Yaowarat night feast — oyster omelette, guay jub, toasted buns.' },
-    ],
-  },
   {
     id: 'area-riverside',
     name: 'Riverside',
@@ -113,12 +55,12 @@ const AREAS = [
     thai: 'เจ้าพระยา',
     short: 'the Riverside',
     bestFor: 'scenic stays, families and sunsets',
-    img: U('photo-1528181304800-259b08848526'),
+    img: HERO_IMG,
     seed: 'bk-riverside',
-    alt: 'Long-tail boats on the water in Thailand, in the style of the Chao Phraya River',
-    sizes: '(min-width: 768px) 33vw, 100vw',
-    span: 'md:col-span-4',
-    imgH: 'h-56',
+    alt: 'Wat Arun glowing at dusk across the Chao Phraya River in Bangkok',
+    sizes: '(min-width: 768px) 58vw, 100vw',
+    span: 'md:col-span-7',
+    mediaClass: 'h-64 sm:h-80 md:h-[430px]',
     desc: 'The Chao Phraya is Bangkok’s original highway, lined with temples, former trading houses and grand hotels. Orange-flag express boats stitch it together for about ฿20 a hop, linking IconSiam’s indoor floating market, Wat Arun and the night stalls of Asiatique.',
     plan: [
       { t: '09:00', d: 'Orange-flag boat from Sathorn pier (about ฿20).' },
@@ -128,18 +70,86 @@ const AREAS = [
     ],
   },
   {
+    id: 'area-old-city',
+    name: 'Old City & Rattanakosin',
+    kicker: 'The historic core',
+    thai: 'รัตนโกสินทร์',
+    short: 'the Old City',
+    bestFor: 'first-timers and temple lovers',
+    icon: 'pin',
+    grad: 'bg-gradient-to-br',
+    img: null, // add a verified Grand Palace / Wat Pho / Wat Phra Kaew photo URL here to switch this tile to a photograph
+    seed: 'bk-old-city',
+    alt: 'Golden spires of the Grand Palace complex in Bangkok’s Old City',
+    sizes: '(min-width: 768px) 42vw, 100vw',
+    span: 'md:col-span-5',
+    mediaClass: 'h-64 sm:h-80 md:h-[430px]',
+    desc: 'The historic heart of Bangkok, home to its grandest sights: the Grand Palace and Wat Phra Kaew, the reclining Buddha at Wat Pho and Wat Arun rising across the river. Wide boulevards, canal-side shophouses and the city’s best museums make this the district to slow down in.',
+    plan: [
+      { t: '08:30', d: 'Grand Palace at opening — beat the heat and the tour groups (฿500, dress code enforced).' },
+      { t: '11:30', d: 'Wat Pho for the reclining Buddha, then a 30-minute massage on site (from ฿420).' },
+      { t: '15:00', d: 'Cross the river on the ฿5 ferry and climb Wat Arun’s terrace before the light turns golden.' },
+      { t: '19:00', d: 'Dinner on the Tha Tien stretch, long-tail boats chattering past.' },
+    ],
+  },
+  {
+    id: 'area-chinatown',
+    name: 'Chinatown / Yaowarat',
+    kicker: 'Noodle nirvana',
+    thai: 'เยาวราช',
+    short: 'Chinatown',
+    bestFor: 'food lovers and night photographers',
+    img: 'https://images.unsplash.com/photo-1552550018-5253c1b171e3?q=80&w=1600&auto=format&fit=crop',
+    seed: 'bk-chinatown',
+    alt: 'Neon-lit Yaowarat Road in Bangkok’s Chinatown at night',
+    sizes: '(min-width: 768px) 33vw, 100vw',
+    span: 'md:col-span-4',
+    mediaClass: 'h-56',
+    desc: 'One of the world’s great Chinatowns — a gilded, incense-scented grid of gold shops, herbalists and street vendors, crowned by Wat Traimit’s 5.5-tonne solid-gold Buddha. Come hungry: Yaowarat Road becomes one of Asia’s finest open-air restaurants after 6pm, and the MRT’s Wat Mangkon station drops you right inside it.',
+    plan: [
+      { t: '10:00', d: 'Wat Traimit’s Golden Buddha before the crowds.' },
+      { t: '14:00', d: 'Crawl Sampeng Lane’s wholesale alley, coffee in a shophouse after.' },
+      { t: '18:30', d: 'The Yaowarat night feast — oyster omelette, guay jub, toasted buns.' },
+    ],
+  },
+  {
+    id: 'area-sukhumvit',
+    name: 'Sukhumvit',
+    kicker: 'The modern spine',
+    thai: 'สุขุมวิท',
+    short: 'Sukhumvit',
+    bestFor: 'nightlife, dining and easy BTS living',
+    icon: 'train',
+    grad: 'bg-gradient-to-tl',
+    img: null, // add a verified Bangkok skyline / BTS Skytrain photo URL here
+    seed: 'bk-sukhumvit',
+    alt: 'Bangkok’s Sukhumvit skyline and BTS Skytrain',
+    sizes: '(min-width: 768px) 33vw, 100vw',
+    span: 'md:col-span-4',
+    mediaClass: 'h-56',
+    desc: 'Bangkok’s modern spine, running from Nana out past Thong Lor and On Nut — malls (Terminal 21, EmQuartier), international kitchens, speakeasies and some of the city’s highest rooftop bars. By day it’s cafés and day-spas; after dark, Soi 11 and Thong Lor take over.',
+    plan: [
+      { t: '11:00', d: 'Terminal 21 — a different world city on every floor, plus a food court that costs pennies.' },
+      { t: '16:00', d: 'Benjakitti Park’s skyline boardwalk, built out over the water.' },
+      { t: '19:30', d: 'Izakayas and wine bars around Thong Lor 10.' },
+      { t: '22:00', d: 'One last cocktail on a Soi 11 rooftop.' },
+    ],
+  },
+  {
     id: 'area-chatuchak',
     name: 'Chatuchak',
     kicker: 'Weekend city',
     thai: 'จตุจักร',
     short: 'Chatuchak',
     bestFor: 'shoppers and Saturday-morning browsers',
-    img: U('photo-1552465011-b4e21bf6e79a'),
+    icon: 'bag',
+    grad: 'bg-gradient-to-bl',
+    img: null, // add a verified Chatuchak Weekend Market photo URL here
     seed: 'bk-chatuchak',
-    alt: 'Busy covered market alley packed with stalls and shoppers',
+    alt: 'Stalls and crowds at Chatuchak Weekend Market, Bangkok',
     sizes: '(min-width: 768px) 33vw, 100vw',
     span: 'md:col-span-4',
-    imgH: 'h-56',
+    mediaClass: 'h-56',
     desc: 'Weekend Bangkok at full volume: the legendary Chatuchak Weekend Market spreads roughly 15,000 stalls across 27 numbered zones, with the superb Or Tor Kor produce market next door. Arrive by 10am, carry water, and haggle with a smile. Saturdays and Sundays, 9am–6pm.',
     plan: [
       { t: '10:00', d: 'MRT to Kamphaeng Phet — coffee first, then zones 2–6.' },
@@ -154,12 +164,15 @@ const AREAS = [
     thai: 'สีลม',
     short: 'Silom',
     bestFor: 'value hotels and central transport links',
-    horizontal: true,
-    img: U('photo-1512553353614-82a7370096dc'),
+    icon: 'wallet',
+    grad: 'bg-gradient-to-tr',
+    img: null, // add a verified Silom / Lumpini Park photo URL here
     seed: 'bk-silom',
-    alt: 'Tuk-tuk waiting in a Bangkok street near Silom',
+    alt: 'Silom district, Bangkok',
     sizes: '(min-width: 768px) 38vw, 100vw',
     span: 'md:col-span-12',
+    horizontal: true,
+    mediaClass: 'h-56 w-full md:h-auto md:min-h-[280px] md:w-[38%] md:shrink-0',
     desc: 'Thailand’s financial district on weekdays — then the side streets take over. Convent Road’s lunch carts are a city institution, monitor lizards sunbathe in Lumpini Park beneath the towers, and Patpong’s famous night market runs nightly under the neon. It also sits on the BTS/MRT interchange at Sala Daeng.',
     plan: [
       { t: '08:00', d: 'Lumpini Park before the heat — yes, the lizards are real.' },
@@ -388,10 +401,10 @@ function SectionHead({ id, eyebrow, title, sub }) {
         <span className="h-px w-8 bg-[#c9a84c]" aria-hidden="true" />
         {eyebrow}
       </p>
-      <h2 id={id} className="mt-3 scroll-mt-28 font-display text-3xl font-semibold leading-[1.12] text-jade sm:text-4xl lg:text-[2.6rem]">
+      <h2 id={id} className="mt-3 scroll-mt-28 font-display text-4xl font-semibold leading-[1.05] text-jade sm:text-5xl lg:text-[3.4rem]">
         {title}
       </h2>
-      {sub && <p className="mt-4 text-lg leading-relaxed text-ink-soft">{sub}</p>}
+      {sub && <p className="mt-5 text-lg leading-relaxed text-ink-soft">{sub}</p>}
     </div>
   );
 }
@@ -463,42 +476,46 @@ function Skyline() {
 }
 
 function Hero() {
+  const heroShadow = '[text-shadow:0_2px_20px_rgba(0,0,0,0.5)]';
   return (
     <section className="relative flex min-h-[640px] items-end overflow-hidden bg-[#161310] md:min-h-[88vh]">
-      <div className="absolute inset-0 h-full w-full overflow-hidden" aria-hidden="true">
+      {/* Autoplaying, muted, looping YouTube background — scaled to 115% and
+          centred so YouTube’s UI chrome sits outside the visible frame */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
         <iframe
-          className="pointer-events-none absolute left-1/2 top-1/2 h-[130%] w-[130%]"
-          style={{ transform: 'translate(-50%, -50%) scale(1.15) translateY(-7%)' }}
           src={`https://www.youtube-nocookie.com/embed/${HERO_VIDEO_ID}?autoplay=1&mute=1&loop=1&playlist=${HERO_VIDEO_ID}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&disablekb=1`}
-          title="Bangkok — Tourism Authority of Thailand"
-          allow="autoplay; encrypted-media"
+          title="Bangkok, Thailand — film by the Tourism Authority of Thailand"
+          allow="autoplay; encrypted-media; picture-in-picture"
+          referrerPolicy="strict-origin-when-cross-origin"
           frameBorder="0"
+          className="absolute left-1/2 top-1/2 h-[115%] w-[115%] -translate-x-1/2 -translate-y-1/2"
         />
       </div>
       <noscript>
         <img
           src={HERO_POSTER}
-          alt="Bangkok skyline"
+          alt="Bangkok’s neon-lit streets after dark"
           className="absolute inset-0 h-full w-full object-cover"
         />
       </noscript>
-      <div className="absolute inset-0 bg-gradient-to-t from-[#12100c]/90 via-[#12100c]/40 to-[#12100c]/15" aria-hidden="true" />
+      {/* Near-opaque scrim — minimum 60% coverage at every point for legibility against any frame */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#12100c]/95 via-[#12100c]/70 to-[#12100c]/60" aria-hidden="true" />
       <Skyline />
 
       <div className="relative z-10 mx-auto w-full max-w-6xl px-4 pb-[150px] pt-32 sm:px-6 sm:pb-[170px] md:pb-[210px]">
-        <p className="eyebrow rise flex items-center gap-3 text-[#e9d9a6]" style={{ animationDelay: '0.05s' }}>
+        <p className={`eyebrow rise flex items-center gap-3 text-[#e9d9a6] ${heroShadow}`} style={{ animationDelay: '0.05s' }}>
           <span className="h-px w-10 bg-[#c9a84c]" aria-hidden="true" />
           The UK’s independent Bangkok travel guide
         </p>
         <h1 className="mt-5 font-display text-[#fffdf7]">
-          <span className="rise block text-[2.6rem] font-semibold leading-[1.02] tracking-tight sm:text-6xl lg:text-7xl" style={{ animationDelay: '0.15s' }}>
+          <span className={`rise block text-[2.6rem] font-semibold leading-[1.02] tracking-tight sm:text-6xl lg:text-7xl ${heroShadow}`} style={{ animationDelay: '0.15s' }}>
             Bangkok Holidays
           </span>
-          <span className="rise mt-3 block text-xl font-medium italic text-[#efd9a0] sm:text-3xl lg:text-4xl" style={{ animationDelay: '0.25s' }}>
+          <span className={`rise mt-3 block text-xl font-medium italic text-[#efd9a0] sm:text-3xl lg:text-4xl ${heroShadow}`} style={{ animationDelay: '0.25s' }}>
             — Temples, Street Food &amp; the Heart of Thailand
           </span>
         </h1>
-        <p className="rise mt-5 max-w-2xl text-base leading-relaxed text-[#f3ead4] sm:text-lg" style={{ animationDelay: '0.35s' }}>
+        <p className={`rise mt-5 max-w-2xl text-base leading-relaxed text-[#f3ead4] sm:text-lg ${heroShadow}`} style={{ animationDelay: '0.35s' }}>
           Direct flights from the UK take around 11 hours — and Bangkok repays every one of them with golden
           temples, £1 street-food feasts, penny-fare river boats and 30°C February afternoons. This guide shows
           you when to visit Bangkok, where to stay and what to book first, whether it’s your first Bangkok
@@ -547,6 +564,81 @@ function WhyVisit() {
   );
 }
 
+function AreaMedia({ area }) {
+  if (area.img) {
+    return (
+      <div className={`relative overflow-hidden ${area.mediaClass}`}>
+        <SmartImage
+          src={area.img}
+          seed={area.seed}
+          alt={area.alt}
+          width={1200}
+          height={800}
+          sizes={area.sizes}
+          className="absolute inset-0 h-full w-full object-cover object-[50%_30%] transition-transform duration-700 group-hover:scale-[1.04]"
+        />
+        <span className="thai absolute bottom-2.5 right-4 text-2xl text-white/90 drop-shadow-[0_1px_6px_rgba(0,0,0,0.55)]">
+          {area.thai}
+        </span>
+      </div>
+    );
+  }
+  return (
+    <div className={`relative overflow-hidden ${area.mediaClass}`}>
+      <div className={`absolute inset-0 ${area.grad} from-[#0f5132] via-[#0d4a2e] to-[#0a3a23]`}>
+        <span aria-hidden="true" className="thai pointer-events-none absolute -right-6 -top-10 select-none text-[8rem] leading-none text-[#e9d9a6]/15 md:text-[10rem]">
+          {area.thai}
+        </span>
+        <span aria-hidden="true" className="thai pointer-events-none absolute left-5 top-4 select-none text-lg text-[#e9d9a6]/30">
+          {area.thai}
+        </span>
+      </div>
+      <span className="absolute bottom-3.5 left-5 z-10 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#e9d9a6]">
+        <Icon name={area.icon || 'pin'} className="h-3.5 w-3.5" />
+        Bangkok · {area.short}
+      </span>
+    </div>
+  );
+}
+
+function AreaCard({ area }) {
+  return (
+    <article
+      id={area.id}
+      className={`${area.span} group scroll-mt-28 overflow-hidden rounded-2xl border border-line bg-white shadow-[0_1px_0_rgba(43,36,24,0.04)] transition-shadow duration-300 hover:shadow-[0_20px_45px_-20px_rgba(43,36,24,0.35)] ${area.horizontal ? 'md:flex' : ''}`}
+    >
+      <AreaMedia area={area} />
+      <div className="flex flex-1 flex-col p-6">
+        <h3 className="font-display text-[1.35rem] font-semibold leading-snug text-jade">{area.name}</h3>
+        <p className="eyebrow mt-1 text-gold-deep">{area.kicker}</p>
+        <p className="mt-3 text-[15px] leading-relaxed text-ink-soft">{area.desc}</p>
+        <p className="mt-4 text-sm">
+          <span className="font-semibold text-jade">Best for:</span>{' '}
+          <span className="text-ink-soft">{area.bestFor}</span>
+        </p>
+
+        <details className="group/plan mt-auto pt-5">
+          <summary className="inline-flex cursor-pointer list-none items-center gap-1.5 text-sm font-semibold text-terra transition-colors hover:text-terra-deep">
+            Explore {area.short}
+            <Icon name="chevron" className="h-4 w-4 transition-transform duration-300 group-open/plan:rotate-180" />
+          </summary>
+          <div className="mt-3 rounded-xl border-l-4 border-[#c9a84c] bg-[#fff9e6] p-4">
+            <p className="eyebrow text-gold-deep">A simple day plan</p>
+            <ol className="mt-2.5 space-y-2 text-sm leading-snug text-[#3e3623]">
+              {area.plan.map((s) => (
+                <li key={s.t} className="flex gap-3">
+                  <span className="w-11 shrink-0 font-semibold tabular-nums text-jade">{s.t}</span>
+                  <span>{s.d}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </details>
+      </div>
+    </article>
+  );
+}
+
 function Areas() {
   return (
     <section className="pb-16 md:pb-24">
@@ -590,6 +682,28 @@ function Areas() {
   );
 }
 
+function RiverBand() {
+  return (
+    <figure className="relative h-[380px] w-full overflow-hidden md:h-[500px]">
+      <SmartImage
+        src={HERO_IMG}
+        seed="bangkok-river-band"
+        alt="Wat Arun and the Chao Phraya River at dusk, Bangkok"
+        width={2400}
+        height={1350}
+        sizes="100vw"
+        className="absolute inset-0 h-full w-full object-cover object-[50%_35%]"
+      />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#12100c]/85 via-[#12100c]/40 to-transparent" aria-hidden="true" />
+      <figcaption className="absolute bottom-8 left-0 z-10 max-w-2xl px-4 sm:px-8 md:px-12">
+        <p className="font-display text-2xl font-medium italic leading-snug text-[#fffdf7] [text-shadow:0_2px_20px_rgba(0,0,0,0.5)] md:text-4xl">
+          “Bangkok turns gold at dusk — and the best seat in the city is a ฿5 ferry crossing the Chao Phraya.”
+        </p>
+      </figcaption>
+    </figure>
+  );
+}
+
 function ThingsToDo() {
   return (
     <section className="bg-cream py-16 md:py-24">
@@ -625,23 +739,26 @@ function ThingsToDo() {
             </div>
           ))}
         </div>
+      </div>
 
-        <figure className="mt-14 overflow-hidden rounded-2xl border border-line">
+      {/* Full-bleed photography moment — edge to edge, no card chrome */}
+      <figure className="mt-16 md:mt-20">
+        <div className="relative h-72 w-full overflow-hidden md:h-[440px]">
           <SmartImage
-            src={U('photo-1555126634-323283e090fa')}
+            src="https://images.unsplash.com/photo-1555126634-323283e090fa?q=80&w=1600&auto=format&fit=crop"
             seed="bangkok-street-food"
             alt="Chef tossing noodles in a flaming wok at a Bangkok street-food stall"
-            width={1600}
-            height={700}
-            sizes="(min-width: 1152px) 1152px, 100vw"
-            className="h-56 w-full object-cover sm:h-72 md:h-80"
+            width={2400}
+            height={1000}
+            sizes="100vw"
+            className="absolute inset-0 h-full w-full object-cover"
           />
-          <figcaption className="flex flex-wrap items-center gap-x-3 gap-y-1 bg-white px-5 py-4 text-sm text-ink-soft">
-            <span className="eyebrow shrink-0 text-terra">Eat this</span>
-            Late-night wok fire on Yaowarat Road — in Bangkok, street food isn’t a sideshow; it’s the headline act.
-          </figcaption>
-        </figure>
-      </div>
+        </div>
+        <figcaption className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-3 gap-y-1 px-4 pt-4 text-sm text-ink-soft sm:px-6">
+          <span className="eyebrow shrink-0 text-terra">Eat this</span>
+          Late-night wok fire on Yaowarat Road — in Bangkok, street food isn’t a sideshow; it’s the headline act.
+        </figcaption>
+      </figure>
     </section>
   );
 }
@@ -726,25 +843,31 @@ function WhenToVisit() {
 
 function Budget() {
   return (
-    <section className="py-16 md:py-24">
+    <section className="bg-jade-deep py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <SectionHead
-          id="budget"
-          eyebrow="What it really costs"
-          title="Is Bangkok Expensive? What a Bangkok Holiday Really Costs"
-          sub="Short answer: no — and the numbers below show exactly how far £1 goes."
-        />
+        <div className="max-w-3xl">
+          <p className="eyebrow flex items-center gap-3 text-[#e9d9a6]">
+            <span className="h-px w-8 bg-[#c9a84c]" aria-hidden="true" />
+            What it really costs
+          </p>
+          <h2 id="budget" className="mt-3 scroll-mt-28 font-display text-4xl font-semibold leading-[1.05] text-[#faf4e8] sm:text-5xl lg:text-[3.4rem]">
+            Is Bangkok Expensive? What a Bangkok Holiday Really Costs
+          </h2>
+          <p className="mt-5 text-lg leading-relaxed text-[#bfd8c8]">
+            Short answer: no — and the numbers below show exactly how far £1 goes.
+          </p>
+        </div>
 
         <div className="mt-10 max-w-4xl">
           {BUDGETS.map((b) => (
-            <div key={b.t} className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b border-line py-5">
+            <div key={b.t} className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b border-white/15 py-5">
               <div className="max-w-md">
-                <h3 className="font-display text-xl font-semibold text-jade">{b.t}</h3>
-                <p className="mt-1 text-sm text-ink-soft">{b.d}</p>
+                <h3 className="font-display text-xl font-semibold text-[#faf4e8]">{b.t}</h3>
+                <p className="mt-1 text-sm text-[#bfd8c8]">{b.d}</p>
               </div>
-              <p className="font-display text-2xl font-semibold tabular-nums text-jade">
+              <p className="font-display text-2xl font-semibold tabular-nums text-[#e9d9a6]">
                 {b.p}
-                <span className="ml-1 text-sm font-normal text-ink-soft">/ day</span>
+                <span className="ml-1 text-sm font-normal text-[#9dbbaa]">/ day</span>
               </p>
             </div>
           ))}
@@ -752,14 +875,14 @@ function Budget() {
 
         <div className="mt-12 grid max-w-4xl gap-x-12 gap-y-0 md:grid-cols-2">
           {PRICES.map(([what, cost]) => (
-            <div key={what} className="flex items-baseline gap-3 border-b border-dashed border-[#e0d5ba] py-3">
-              <span className="text-sm text-ink-soft">{what}</span>
-              <span className="flex-1 border-b border-dotted border-[#c9bfa4]" aria-hidden="true" />
-              <span className="shrink-0 text-sm font-semibold tabular-nums text-[#2b2418]">{cost}</span>
+            <div key={what} className="flex items-baseline gap-3 border-b border-dashed border-white/20 py-3">
+              <span className="text-sm text-[#cfe2d6]">{what}</span>
+              <span className="flex-1 border-b border-dotted border-white/25" aria-hidden="true" />
+              <span className="shrink-0 text-sm font-semibold tabular-nums text-[#faf4e8]">{cost}</span>
             </div>
           ))}
         </div>
-        <p className="mt-5 max-w-4xl text-sm text-ink-soft">
+        <p className="mt-5 max-w-4xl text-sm text-[#9dbbaa]">
           Rates at roughly ฿45 = £1. Cards are accepted in malls and hotels; carry cash for markets and street
           stalls. Prices verified at the time of our last review ({LAST_REVIEWED}).
         </p>
@@ -988,9 +1111,9 @@ function Footer() {
 function Header() {
   return (
     <header id="top" className="sticky top-0 z-50 border-b border-line bg-[#fffdf7]/90 backdrop-blur-md">
-      <div className="mx-auto flex h-14 max-w-6xl items-center gap-6 px-4 sm:px-6">
-        <a href="#top" className="flex shrink-0 items-center gap-2 font-display text-lg font-bold tracking-tight text-jade">
-          <svg width="17" height="20" viewBox="0 0 18 22" fill="none" stroke="#c9a84c" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <div className="mx-auto flex h-16 max-w-6xl items-center gap-6 px-4 sm:px-6">
+        <a href="#top" className="flex shrink-0 items-center gap-2 font-display text-2xl font-bold tracking-tight text-jade">
+          <svg width="20" height="24" viewBox="0 0 18 22" fill="none" stroke="#c9a84c" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <path d="M2 20h14M4 20v-6h10v6M6 14v-5h6v5M7.5 9 9 3l1.5 6M9 3V1" />
           </svg>
           Bangkok<span className="text-[#c9a84c]">.co.uk</span>
@@ -1030,6 +1153,7 @@ export default function Page() {
         <Hero />
         <WhyVisit />
         <Areas />
+        <RiverBand />
         <ThingsToDo />
         <Practical />
         <WhenToVisit />
